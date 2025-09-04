@@ -4,70 +4,53 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Bienvenue dans TodoList !");
+        Scanner sc = new Scanner(System.in);
+        // Lancer une étape spécifique
+        System.out.print("Quel jour veux tu tester ? ");
+        String nbJour = sc.nextLine().strip();
 
-        // Scanner pour lire les entrées utilisateur
-        try (Scanner sc = new Scanner(System.in)) {
-
-            // 1️⃣ Demander le prénom
-            System.out.print("Ton prénom ? ");
-            String prenom = sc.nextLine();
-
-            if (prenom.isBlank()) {
-                System.out.println("Prénom vide !");
-            } else {
-                System.out.println("Bonjour " + prenom + " !");
+        switch (nbJour) {
+            case "1" -> {
+                System.out.println("Lancement Jour 1");
+                Jour1.run();
             }
-
-            // 2️⃣ Variables pour calculs
-            int entier = 0; // <-- à remplir
-            System.out.print("Ton premier nombre ? ");
-            int a = sc.nextInt();
-
-            System.out.print("Ton deuxieme nombre ? ");
-            int b = sc.nextInt();
-
-            sc.nextLine();  // pour enlever le retour à la ligne
-
-
-            // 3️⃣ Calculs à faire
-            int somme = a + b;        // <-- à calculer
-
-            int difference = a - b;   // <-- à calculer
-
-            int produit = a * b;      // <-- à calculer
-
-            double division = (double) a / b;  // <-- à calculer
-
-            // 4️⃣ Affichage conditionnel
-            boolean afficherDetails = false;
-            String reponse;
-
-            do {
-                System.out.print("Veux-tu voir le résultat ? (oui/non) : ");
-                reponse = sc.nextLine().strip().toLowerCase();
-
-                if (!reponse.equals("oui") && !reponse.equals("non")) {
-                    System.out.println("Veuillez saisir 'oui' ou 'non' !");
-                }
-            } while (!reponse.equals("oui") && !reponse.equals("non"));
-
-            if (reponse.equals("oui")) {
-                afficherDetails = true;
-            } else {
-                System.out.println("D'accord");
+            case "2" -> {
+                System.out.println("Lancement Jour 2");
+                Jour2.run();
             }
-            if (afficherDetails) {
-                System.out.println("La somme de ces deux nombres est : " + somme + "!");
-                System.out.println("La différence de ces deux nombres est : " + difference + "!");
-                System.out.println("Le produit de ces deux nombres est : " + produit + "!");
-                System.out.println("La division décimale de ces deux nombres est : " + division + "!");
-                // <-- afficher les résultats ici
+            /*case "3" -> {
+                System.out.println("Lancement Jour 3");
+                Jour3.run();
             }
-
-            // 5️⃣ Bonus : demander deux nombres à l'utilisateur et refaire les calculs
-            // <-- à compléter
-
+            case "4" -> {
+                System.out.println("Lancement Jour 4");
+                Jour4.run();
+            }
+            case "5" -> {
+                System.out.println("Lancement Jour 5");
+                Jour5.run();
+            }
+            case "6" -> {
+                System.out.println("Lancement Jour 6");
+                Jour6.run();
+            }
+            case "7" -> {
+                System.out.println("Lancement Jour 7");
+                Jour7.run();
+            }
+            case "8" -> {
+                System.out.println("Lancement Jour 8");
+                Jour8.run();
+            }
+            case "9" -> {
+                System.out.println("Lancement Jour 9");
+                Jour9.run();
+            }
+            case "10" -> {
+                System.out.println("Lancement Jour 10");
+                Jour10.run();
+            }*/
+            default -> System.out.println("Jour invalide !");
         }
     }
 }
