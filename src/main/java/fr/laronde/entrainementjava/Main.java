@@ -18,11 +18,11 @@ public class Main {
                 System.out.println("Lancement Jour 2");
                 Jour2.run();
             }
-            /*case "3" -> {
+            case "3" -> {
                 System.out.println("Lancement Jour 3");
                 Jour3.run();
             }
-            case "4" -> {
+            /*case "4" -> {
                 System.out.println("Lancement Jour 4");
                 Jour4.run();
             }
