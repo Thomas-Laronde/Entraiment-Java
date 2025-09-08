@@ -8,6 +8,8 @@ public class TodoList {
 
     private final List<Task> tasks = new ArrayList<>();
     private int id = 1;
+    public record OperationResult(boolean success, String message) { }
+
 
     public Task addTask(String title) {
 
@@ -21,19 +23,19 @@ public class TodoList {
         return nouvelleTache;
     }
 
-    public boolean toggle(int id) {
+    public OperationResult toggle(int id) {
         for (Task task : tasks) {
             if (id == task.getId()) {
                 if (!task.isDone()) {
                     task.markDone();
+                    return new OperationResult(true, "Tâche marquée comme faite !");
                 } else {
                     task.markUndone();
+                    return new OperationResult(true, "Tâche marquée comme non faite !");
                 }
-                return true;
             }
-
         }
-        return false;
+        return new OperationResult(false,"Tâche non trouvée" );
     }
 
 
@@ -50,19 +52,19 @@ public class TodoList {
          return tasks;
     }
 
-public boolean removeTask(int id) {
+
+public OperationResult removeTask(int id) {
 
     for (Task task : tasks) {
         if (task.getId() == id) {
             tasks.remove(task);
-            return true;
+            return new OperationResult(true, "Tâche supprimée !");
         }
-
-
     }
-    System.out.println("La tâche n'existe pas ");
-    return false;
+    return new OperationResult(false, " la tâche n'existe pas ");
 }
+
+
 
 
 }

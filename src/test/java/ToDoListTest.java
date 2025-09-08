@@ -40,10 +40,20 @@ class ToDoListTest {
 
         Task task = todoList.addTask("Acheter du fromage");
 
-        assertFalse(task.isDone());
-        assertFalse(todoList.toggle(50));
-        assertTrue(todoList.toggle(task.getId()));
-       assertTrue(task.isDone());
+        // La tâche existe
+        TodoList.OperationResult resultExist = todoList.toggle(task.getId());
+        assertTrue(resultExist.success());
+        assertEquals("Tâche marquée comme faite !",resultExist.message() );
+
+        // La tâche n'existe pas
+        TodoList.OperationResult resultNotExist = todoList.toggle(50);
+        assertFalse(resultNotExist.success());
+        assertEquals("Tâche non trouvée",resultNotExist.message());
+
+        // La tâche à été cochée
+        TodoList.OperationResult resulToggled = todoList.toggle(task.getId());
+        assertTrue(resulToggled.success());
+       assertEquals("Tâche marquée comme non faite !", resulToggled.message());
     }
 
     @Test
@@ -52,7 +62,9 @@ class ToDoListTest {
 
         Task tache = todoList.addTask("Tâche qui va partir");
 
-        assertTrue(todoList.removeTask(tache.getId()));
-        assertFalse(todoList.removeTask(tache.getId()));
+        TodoList.OperationResult result = todoList.removeTask(tache.getId());
+
+        assertTrue(result.success());
+        assertEquals("Tâche supprimée !", result.message());
     }
 }
