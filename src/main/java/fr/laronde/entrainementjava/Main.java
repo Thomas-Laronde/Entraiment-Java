@@ -4,28 +4,31 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        // Lancer une étape spécifique
-        System.out.print("Quel jour veux tu tester ? ");
-        String nbJour = sc.nextLine().strip();
+        try {
+            Scanner sc = new Scanner(System.in);
+            // Lancer une étape spécifique
+            System.out.print("Quel jour veux tu tester ? ");
+            String nbJour = sc.nextLine().strip();
 
-        switch (nbJour) {
-            case "1" -> {
-                System.out.println("Lancement Jour 1");
-                Jour1.run();
-            }
-            case "2" -> {
-                System.out.println("Lancement Jour 2");
-                Jour2.run();
-            }
-            case "3" -> {
-                System.out.println("Lancement Jour 3");
-                Jour3.run();
-            }
-            /*case "4" -> {
-                System.out.println("Lancement Jour 4");
-                Jour4.run();
-            }
+            switch (nbJour) {
+                case "1" -> {
+                    System.out.println("Lancement Jour 1");
+                    Jour1.run();
+                }
+                case "2" -> {
+                    System.out.println("Lancement Jour 2");
+                    Jour2.run();
+                }
+                case "3" -> {
+                    System.out.println("Lancement Jour 3");
+                    Jour3.run();
+                }
+                case "4" -> {
+                    System.out.println("Lancement Jour 4");
+                    Jour4.run();
+                }
+
+             /*
             case "5" -> {
                 System.out.println("Lancement Jour 5");
                 Jour5.run();
@@ -49,8 +52,12 @@ public class Main {
             case "10" -> {
                 System.out.println("Lancement Jour 10");
                 Jour10.run();
-            }*/
-            default -> System.out.println("Jour invalide !");
+            }
+            */
+                default -> System.out.println("Jour invalide !");
+            }
+        } catch (InvalidTaskOperationException e) {
+            System.out.println("Erreur : " + e.getMessage());
         }
     }
 }

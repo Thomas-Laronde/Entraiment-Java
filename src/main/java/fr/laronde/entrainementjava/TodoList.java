@@ -13,9 +13,8 @@ public class TodoList {
 
     public Task addTask(String title) {
 
-        if (title == null || title.isBlank()) {
-            System.out.println("veuillez renseigner une tâche");
-            return null;
+        if (title.isBlank() || title == null) {
+            throw new InvalidTaskOperationException("L'id de la tâche est invalide !");
         }
         Task nouvelleTache = new Task(id, title);
         tasks.add(nouvelleTache);
@@ -55,7 +54,11 @@ public class TodoList {
 
 public OperationResult removeTask(int id) {
 
+    if (id < 0) {
+        throw new InvalidTaskOperationException("L'id de la tâche est invalide !");
+    }
     for (Task task : tasks) {
+
         if (task.getId() == id) {
             tasks.remove(task);
             return new OperationResult(true, "Tâche supprimée !");
@@ -63,7 +66,37 @@ public OperationResult removeTask(int id) {
     }
     return new OperationResult(false, " la tâche n'existe pas ");
 }
+    // Renvoie toutes les tâches faites
+    public List<Task> listDone() {
+        List<Task> result = new ArrayList<>();
+        for (Task tacheFaite : tasks) {
+            if (tacheFaite.isDone()){
+                result.add(tacheFaite);
+            }
+        } return result;
+    }
 
+    // Renvoie toutes les tâches non faites
+    public List<Task> listUndone() {
+        List<Task> result = new ArrayList<>();
+        for (Task tacheNonFaite : tasks) {
+            if (!tacheNonFaite.isDone()) {
+                result.add(tacheNonFaite);
+            }
+        }
+        return result;
+    }
+
+    // Recherche par mot-clé (insensible à la casse)
+    public List<Task> search(String keyword) {
+        List<Task> result = new ArrayList<>();
+        for (Task tacheTrouvee : tasks) {
+            if (tacheTrouvee.getTitle().toLowerCase().contains(keyword.toLowerCase())) {
+                result.add(tacheTrouvee);
+            }
+        }
+        return result;
+    }
 
 
 

@@ -1,6 +1,9 @@
 import fr.laronde.entrainementjava.Task;
 import fr.laronde.entrainementjava.TodoList;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ToDoListTest {
@@ -66,5 +69,29 @@ class ToDoListTest {
 
         assertTrue(result.success());
         assertEquals("Tâche supprimée !", result.message());
+    }
+
+    @Test
+    void testListDoneAndUndone() {
+        // Je recré une Todolist de class TodoList
+        TodoList testTodolist = new TodoList();
+
+        // J'ajoute mes tâches pour ensuite pour manipuler mon resulter et vérifier si ma méthode fonctionne
+        Task t1 = testTodolist.addTask("Acheter du pain");
+        Task t2 = testTodolist.addTask("Faire du sport");
+        Task t3 = testTodolist.addTask("Lire un livre");
+
+        // J'execute le code testé
+        testTodolist.toggle(t1.getId());
+        List<Task> done = testTodolist.listDone();
+        List<Task> undone = testTodolist.listUndone();
+
+        // Je vérifie les resultats
+        assertEquals(1, done.size());
+        assertTrue(done.contains(t1));
+
+        assertEquals(2, undone.size());
+        assertTrue(undone.contains(t2));
+        assertTrue(undone.contains(t3));
     }
 }
